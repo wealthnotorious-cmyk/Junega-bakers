@@ -1,0 +1,1112 @@
+Copy code<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juneja Bakers & Sweets</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #FFF8E1;
+            --chocolate: #5D4037;
+            --soft-pink: #F8BBD0;
+            --golden: #FFD700;
+            --light-brown: #8D6E63;
+            --dark-brown: #3E2723;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--cream) 0%, #ffecb3 100%);
+            color: var(--dark-brown);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--chocolate) 0%, var(--light-brown) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--golden);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255,255,255,0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .stars {
+            color: var(--golden);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 100vh;
+            background: linear-gradient(rgba(93, 64, 55, 0.7), rgba(62, 39, 35, 0.8)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f8bbd0" width="1200" height="800"/><circle fill="%23fff8e1" cx="200" cy="200" r="150" opacity="0.3"/><circle fill="%23ffd700" cx="1000" cy="600" r="100" opacity="0.3"/><circle fill="%235d4037" cx="600" cy="400" r="120" opacity="0.2"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, transparent 30%, rgba(255,255,255,0.1) 70%);
+            animation: shimmer 6s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s;
+            animation-fill-mode: both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s;
+            animation-fill-mode: both;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--golden) 0%, #ffeb3b 100%);
+            color: var(--dark-brown);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--soft-pink) 0%, #f48fb1 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(248, 187, 208, 0.4);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(248, 187, 208, 0.6);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--chocolate);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--golden), var(--soft-pink));
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--light-brown);
+        }
+
+        /* Why Choose Us */
+        .why-us {
+            background: linear-gradient(135deg, var(--cream) 0%, #ffecb3 100%);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: var(--golden);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--golden) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-card h3 {
+            color: var(--chocolate);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Menu Section */
+        .menu {
+            background: white;
+        }
+
+        .menu-toggle {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .menu-btn {
+            background: linear-gradient(135deg, var(--chocolate) 0%, var(--light-brown) 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(93, 64, 55, 0.4);
+        }
+
+        .menu-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .menu-content.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: linear-gradient(135deg, var(--cream) 0%, #ffecb3 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: var(--soft-pink);
+        }
+
+        .cake-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--golden) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .cake-info {
+            padding: 1.5rem;
+        }
+
+        .cake-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--chocolate);
+            margin-bottom: 0.5rem;
+        }
+
+        .cake-price {
+            font-size: 1.2rem;
+            color: var(--light-brown);
+            font-weight: 600;
+        }
+
+        .eggless-badge {
+            background: var(--soft-pink);
+            color: var(--dark-brown);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        .special-note {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--soft-pink) 0%, #f8bbd0 100%);
+            border-radius: 10px;
+            font-style: italic;
+            color: var(--dark-brown);
+        }
+
+        /* Reviews Section */
+        .reviews {
+            background: linear-gradient(135deg, var(--cream) 0%, #ffecb3 100%);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .review-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--soft-pink);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+
+        .review-text {
+            font-style: italic;
+            color: var(--light-brown);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Visit Us Section */
+        .visit-us {
+            background: white;
+        }
+
+        .visit-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .address-card {
+            background: linear-gradient(135deg, var(--cream) 0%, #ffecb3 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .address-card h3 {
+            color: var(--chocolate);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .address-details {
+            color: var(--light-brown);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .map-container {
+            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--golden) 100%);
+            height: 300px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--cream) 0%, #ffecb3 100%);
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-number {
+            font-size: 2rem;
+            color: var(--chocolate);
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .contact-btn.call {
+            background: linear-gradient(135deg, var(--golden) 0%, #ffeb3b 100%);
+            color: var(--dark-brown);
+        }
+
+        .contact-btn.whatsapp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+        }
+
+        .contact-btn.order {
+            background: linear-gradient(135deg, var(--soft-pink) 0%, #f48fb1 100%);
+            color: white;
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .delivery-platforms {
+            margin-top: 2rem;
+            color: var(--light-brown);
+            font-size: 1.1rem;
+        }
+
+        .delivery-platforms i {
+            color: var(--golden);
+            margin: 0 5px;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--chocolate) 0%, var(--dark-brown) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--golden);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #d7ccc8;
+            text-decoration: none;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--golden);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--golden);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1rem;
+            color: #a1887f;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .visit-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Juneja Bakers & Sweets</div>
+                <div class="rating">
+                    <span class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </span>
+                    <span>4.3 (829 reviews)</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Fresh Cakes, Sweet Moments</h1>
+            <p>Enjoy freshly baked cakes, pastries, and sweets at Juneja Bakers & Sweets, one of Madangir's most loved bakeries.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToMenu()">View Menu</button>
+                <a href="tel:09999001929" class="btn btn-secondary">Call Now</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Juneja Bakers & Sweets</h2>
+            <div class="about-content">
+                <p>Juneja Bakers & Sweets is a popular neighborhood bakery known for fresh cakes, delicious pastries, and affordable sweets. Customers love the quality, taste, and friendly service, making it a favorite place for celebrations and sweet cravings.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-us" id="why-us">
+        <div class="container">
+            <h2 class="section-title">Why Customers Love Us</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🍰</div>
+                    <h3>Freshly Baked Daily</h3>
+                    <p>Our cakes are baked fresh every day using the finest ingredients.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🥚</div>
+                    <h3>Eggless Options</h3>
+                    <p>Wide range of eggless cakes available for all dietary preferences.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌈</div>
+                    <h3>Variety of Flavors</h3>
+                    <p>From classic to exotic, we have something for every taste.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Affordable Pricing</h3>
+                    <p>Premium quality cakes at prices that won't break your budget.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">😊</div>
+                    <h3>Friendly Service</h3>
+                    <p>Our team ensures a pleasant and memorable experience.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3>Highly Rated</h3>
+                    <p>Loved by the community with hundreds of positive reviews.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2 class="section-title">Our Delicious Menu</h2>
+            <div class="menu-toggle">
+                <button class="menu-btn" onclick="toggleMenu()">View Our Menu</button>
+            </div>
+            <div class="menu-content" id="menuContent">
+                <div class="menu-grid">
+                    <div class="menu-card">
+                        <div class="cake-image">🍍</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Pineapple Glaze</div>
+                            <div class="cake-price">₹440/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🫐</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Black Forest</div>
+                            <div class="cake-price">₹460/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍯</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Butter Scotch</div>
+                            <div class="cake-price">₹440/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍓</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Strawberry</div>
+                            <div class="cake-price">₹460/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🥭</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Mango</div>
+                            <div class="cake-price">₹480/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🫐</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Blueberry</div>
+                            <div class="cake-price">₹480/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍒</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Vanilla Cherry</div>
+                            <div class="cake-price">₹580/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍫</div>
+                        <div class="cake-info">
+                            <div class="cake-name">White Forest</div>
+                            <div class="cake-price">₹500/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍰</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Cassata Cake</div>
+                            <div class="cake-price">₹560/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍫</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Chocolate Truffle</div>
+                            <div class="cake-price">₹560/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍫</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Chocolate Glaze</div>
+                            <div class="cake-price">₹580/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍫</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Chocolate Flakes</div>
+                            <div class="cake-price">₹600/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍫</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Choco Chips</div>
+                            <div class="cake-price">₹560/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🌈</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Chocolate Rainbow</div>
+                            <div class="cake-price">₹580/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍫</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Choco Vanilla</div>
+                            <div class="cake-price">₹700/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍫</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Rich Chocolate</div>
+                            <div class="cake-price">₹620/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍪</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Oreo Cake</div>
+                            <div class="cake-price">₹620/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍫</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Choco Crunch</div>
+                            <div class="cake-price">₹660/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍫</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Dark Chocolate with Cream</div>
+                            <div class="cake-price">₹680/kg</div>
+                            <span class="eggless-badge">Eggless</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍉</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Fresh Fruit Cake</div>
+                            <div class="cake-price">₹740/kg (Min 1kg)</div>
+                            <span class="eggless-badge">Special</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">📸</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Photo Cake</div>
+                            <div class="cake-price">₹780/kg (Min 1kg)</div>
+                            <span class="eggless-badge">Special</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍫</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Dark Chocolate Truffle</div>
+                            <div class="cake-price">₹800/kg</div>
+                            <span class="eggless-badge">Special</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍷</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Red Velvet</div>
+                            <div class="cake-price">₹1200/kg</div>
+                            <span class="eggless-badge">Special</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🌰</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Almond Cake</div>
+                            <div class="cake-price">₹1400/kg</div>
+                            <span class="eggless-badge">Special</span>
+                        </div>
+                    </div>
+                    <div class="menu-card">
+                        <div class="cake-image">🍫</div>
+                        <div class="cake-info">
+                            <div class="cake-name">Kit-Kat Cake</div>
+                            <div class="cake-price">Price varies</div>
+                            <span class="eggless-badge">Special</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="special-note">
+                    <p><strong>Note:</strong> Extra charges may apply for designer cakes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <p class="review-text">"Bakery and confectionery items at good price."</p>
+                    <div class="review-author">- Satisfied Customer</div>
+                </div>
+                <div class="review-card">
+                    <p class="review-text">"Serves all kinds of desserts and pastries including sugar-free options."</p>
+                    <div class="review-author">- Health Conscious Customer</div>
+                </div>
+                <div class="review-card">
+                    <p class="review-text">"My favourite bakery. Cakes and pastries are fresh and customer service is very good."</p>
+                    <div class="review-author">- Regular Customer</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="visit-us" id="visit-us">
+        <div class="container">
+            <h2 class="section-title">Visit Us</h2>
+            <div class="visit-content">
+                <div class="address-card">
+                    <h3>Juneja Bakers & Sweets</h3>
+                    <div class="address-details">
+                        <p>Lane No.19/553, DDA Market</p>
+                        <p>Near Blue Star Jewellers</p>
+                        <p>Phase II, Madangir</p>
+                        <p>New Delhi – 110062</p>
+                        <p style="margin-top: 1rem;"><strong>Opening Hours:</strong> Open daily – Closes at 11 PM</p>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                        <p>Interactive Map Location</p>
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Lane No.19/553, DDA Market, Madangir</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-number">
+                    <i class="fas fa-phone"></i> 099990 01929
+                </div>
+                <div class="contact-buttons">
+                    <a href="tel:09999001929" class="contact-btn call">
+                        <i class="fas fa-phone"></i> Call Now
+                    </a>
+                    <a href="https://wa.me/919999001929" class="contact-btn whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <button class="contact-btn order" onclick="alert('Ordering online coming soon!')">
+                        <i class="fas fa-shopping-bag"></i> Order Online
+                    </button>
+                </div>
+                <div class="delivery-platforms">
+                    <p style="margin-top: 1rem;">Also available on:</p>
+                    <p style="font-size: 1.2rem; margin-top: 0.5rem;">
+                        <i class="fas fa-utensils"></i> Zomato 
+                        <i class="fas fa-shopping-basket"></i> Swiggy
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Juneja Bakers & Sweets</h4>
+                    <p>Bringing sweetness to your special moments since years.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>099990 01929</p>
+                    <p>Lane No.19/553, DDA Market<br>Madangir, New Delhi - 110062</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Juneja Bakers & Sweets. All rights reserved. Made with <i class="fas fa-heart" style="color: var(--soft-pink);"></i> for sweet moments.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        function scrollToMenu() {
+            document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Toggle menu visibility
+        function toggleMenu() {
+            const menuContent = document.getElementById('menuContent');
+            menuContent.classList.toggle('show');
+            
+            const button = event.target;
+            button.textContent = menuContent.classList.contains('show') ? 'Hide Menu' : 'View Our Menu';
+        }
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Add scroll effect to header
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                header.style.background = 'rgba(93, 64, 55, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, var(--chocolate) 0%, var(--light-brown) 100%)';
+                header.style.backdropFilter = 'none';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Add hover effect to menu cards
+        document.querySelectorAll('.menu-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add click animation to buttons
+        document.querySelectorAll('.btn, .menu-btn, .contact-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Simulate loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
